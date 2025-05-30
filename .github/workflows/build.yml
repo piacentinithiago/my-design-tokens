@@ -1,96 +1,39 @@
-# # .github/workflows/build.yml
-# name: Build Design Tokens
-
-# on:
-#   push:
-#     branches:
-#       - master
-#   pull_request:
-#     branches:
-#       - master
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v4
-
-#       - name: Set up Node.js
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: '20' # Use a versão mais recente LTS
-
-#       - name: Install dependencies
-#         run: npm install --legacy-peer-deps # Adicione --legacy-peer-deps se houver problemas de dependência com Style Dictionary
-
-#       - name: Build Style Dictionary tokens
-#         run: yarn build:tokens
-
-#       - name: Upload build artifacts
-#         uses: actions/upload-artifact@v4
-#         with:
-#           name: design-tokens
-#           path: build/ # Caminho da pasta que contém os tokens compilados
-
-name: Build Style Dictionary Tokens (Design Branch)
+# .github/workflows/build.yml
+name: Build Design Tokens
 
 on:
   push:
     branches:
-      - master # Dispara apenas no branch 'master'
-    paths:
-      - 'tokens/**' # Quando os tokens JSON mudam
-      - 'tokens.config.js' # Quando a configuração do Style Dictionary muda
-  pull_request: # Opcional: roda também para PRs no branch master
+      - master # Corrigido para 'master'
+  pull_request:
     branches:
-      - master
-    paths:
-      - 'tokens/**'
-      - 'tokens.config.js'
-  workflow_dispatch: # Permite disparar manualmente
+      - master # Corrigido para 'master'
 
 jobs:
-  build-and-commit:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # ESSENCIAL: Permite que o GITHUB_TOKEN faça commit e push
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          # Fetch all history for all branches and tags
-          # This is important for git operations that might need full history
-          fetch-depth: 0
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Use a versão recomendada do Node.js
-          cache: 'npm'
+          node-version: '20' # Use a versão mais recente LTS
 
       - name: Install dependencies
-        run: npm install
+        # Se você está usando 'npm install' no seu projeto local, mantenha assim.
+        # Se você está usando 'yarn install' localmente, considere usar 'yarn install' aqui,
+        # mas certifique-se de que o Yarn está disponível no ambiente do Action.
+        run: npm install --legacy-peer-deps
 
       - name: Build Style Dictionary tokens
+        # *** MUDANÇA AQUI: Troque de 'yarn build:tokens' para 'npm run build:tokens' ***
         run: npm run build:tokens
 
-      - name: Commit generated files back to 'design' branch
-        run: |
-          # Configure o Git com o bot de ações do GitHub
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Adiciona todos os arquivos gerados na pasta build/
-          git add build/
-
-          # Verifica se há alterações para commitar.
-          # O || git commit ... garante que o commit só aconteça se houver mudanças.
-          # O [skip ci] é crucial para evitar loops infinitos de actions.
-          git diff --staged --quiet || git commit -m "chore(tokens): auto-update generated tokens [skip ci]"
-
-          # Empurra as alterações para o branch 'design'
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # O token de autenticação
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-tokens
+          path: build/ # Caminho da pasta que contém os tokens compilados
