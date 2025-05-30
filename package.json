@@ -1,10 +1,13 @@
 {
-  "name": "my-design-tokens",
+  "name": "@piacentinithiago/my-design-tokens",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:piacentinithiago/my-design-tokens.git",
   "author": "Thiago Piacentini <piacentinithiago83@gmail.com>",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "build:tokens": "style-dictionary build --config tokens.config.js"
   },
