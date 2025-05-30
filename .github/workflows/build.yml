@@ -1,0 +1,35 @@
+# .github/workflows/build.yml
+name: Build Design Tokens
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Use a versão mais recente LTS
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps # Adicione --legacy-peer-deps se houver problemas de dependência com Style Dictionary
+
+      - name: Build Style Dictionary tokens
+        run: yarn build:tokens
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-tokens
+          path: build/ # Caminho da pasta que contém os tokens compilados

@@ -1,0 +1,42 @@
+# .github/workflows/publish.yml
+name: Publish Design Tokens to GitHub Packages
+
+on:
+  workflow_run:
+    workflows: ["Build Design Tokens"] # Nome do workflow de build
+    types:
+      - completed # Dispara quando o workflow de build é concluído
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} # Publica apenas se o build foi bem-sucedido
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: design-tokens # Nome do artefato que foi enviado pelo workflow de build
+          path: build/ # Caminho onde o artefato será baixado
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://npm.pkg.github.com/' # Muito importante! Configura o registro para o GitHub Packages
+
+      - name: Authenticate with GitHub Packages
+        run: |
+          npm config set //npm.pkg.github.com/:_authToken ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to GitHub Packages
+        run: |
+          # Navegue até a pasta que contém o package.json para publicar o artefato
+          # Neste exemplo, estamos publicando o projeto como um todo,
+          # mas você pode ajustar para publicar apenas os arquivos compilados se desejar.
+          npm publish --access public # Use --access public se quiser que o pacote seja público
