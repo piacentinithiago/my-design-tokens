@@ -39,13 +39,13 @@ name: Build Style Dictionary Tokens (Design Branch)
 on:
   push:
     branches:
-      - design # Dispara apenas no branch 'design'
+      - master # Dispara apenas no branch 'master'
     paths:
       - 'tokens/**' # Quando os tokens JSON mudam
       - 'tokens.config.js' # Quando a configuração do Style Dictionary muda
-  pull_request: # Opcional: roda também para PRs no branch design
+  pull_request: # Opcional: roda também para PRs no branch master
     branches:
-      - design
+      - master
     paths:
       - 'tokens/**'
       - 'tokens.config.js'
