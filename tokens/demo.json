@@ -1,0 +1,155 @@
+{
+  "color": {
+    "background": {
+      "default": {
+        "value": "#ccc",
+        "type": "color"
+      },
+      "primary": {
+        "value": "#0052cc",
+        "type": "color"
+      },
+      "secondary": {
+        "value": "#f4f5f7",
+        "type": "color"
+      },
+      "danger": {
+        "value": "#de350b",
+        "type": "color"
+      },
+      "warning": {
+        "value": "#ffab00",
+        "type": "color"
+      },
+      "success": {
+        "value": "#00f416",
+        "type": "color"
+      },
+      "light": {
+        "value": "#ffffff",
+        "type": "color"
+      },
+      "dark": {
+        "value": "#333333",
+        "type": "color"
+      },
+      "info": {
+        "value": "#00b8d9",
+        "type": "color"
+      }
+    },
+    "text": {
+      "dark": {
+        "value": "#333333",
+        "type": "color"
+      },
+      "light": {
+        "value": "#ffffff",
+        "type": "color"
+      },
+      "default": {
+        "value": "#172b4d",
+        "type": "color"
+      },
+      "onPrimary": {
+        "value": "#ffffff",
+        "type": "color"
+      },
+      "onSecondary": {
+        "value": "#172b4d",
+        "type": "color"
+      },
+      "onDanger": {
+        "value": "#ffffff",
+        "type": "color"
+      },
+      "onWarning": {
+        "value": "#172b4d",
+        "type": "color"
+      },
+      "onSuccess": {
+        "value": "#ffffff",
+        "type": "color"
+      },
+      "onInfo": {
+        "value": "#ffffff",
+        "type": "color"
+      }
+    },
+    "border": {
+      "default": {
+        "value": "#dfe1e6",
+        "type": "border"
+      }
+    },
+    "link": {
+      "value": "#0052cc",
+      "type": "color"
+    }
+  },
+  "spacing": {
+    "md": {
+      "value": "12px",
+      "type": "sizing"
+    },
+    "lg": {
+      "value": "16px",
+      "type": "sizing"
+    }
+  },
+  "font": {
+    "size": {
+      "md": {
+        "value": "16px",
+        "type": "sizing"
+      }
+    }
+  },
+  "radius": {
+    "xs": {
+      "value": "1px",
+      "type": "sizing"
+    },
+    "sm": {
+      "value": "2px",
+      "type": "sizing"
+    },
+    "md": {
+      "value": "4px",
+      "type": "sizing"
+    },
+    "lg": {
+      "value": "8px",
+      "type": "sizing"
+    },
+    "xl": {
+      "value": "10px",
+      "type": "sizing"
+    }
+  },
+  "border": {
+    "width": {
+      "default": {
+        "value": "1px",
+        "type": "sizing"
+      }
+    }
+  },
+  "opacity": {
+    "disabled": {
+      "value": "0.6",
+      "type": "other"
+    }
+  },
+  "$themes": [],
+  "$metadata": {
+    "tokenSetOrder": [
+      "color",
+      "spacing",
+      "font",
+      "radius",
+      "border",
+      "opacity"
+    ]
+  }
+}
